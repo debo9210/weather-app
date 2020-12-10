@@ -1,38 +1,875 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+/* general styles */
+.Container {
+  display: flex;
+  /* border: 2px solid blue; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.LoaderAside {
+  /* border: 2px solid forestgreen; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.LoaderForecast {
+  /* border: 2px solid forestgreen; */
+  display: flex;
+  justify-content: center;
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* aside styles */
+.Aside {
+  /* outline: 1px solid red; */
+  height: 100vh;
+  width: 25%;
+  background: #1e213a;
+}
+
+.AsideNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* outline: 1px solid green; */
+  margin: 25px 30px;
+}
+
+.BtnSearch {
+  font-family: 'Raleway';
+  width: 161px;
+  height: 35px;
+  background: #6e707a;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 19px;
+  border: none;
+  outline: none;
+  /* identical to box height */
+  color: #e7e7eb;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.GpsIcon {
+  /* border: 1px solid tomato; */
+  color: #e7e7eb;
+  background: #6e707a;
+  border-radius: 50%;
+  padding: 5px 6px 5px 5px;
+  font-size: 20px;
+}
+
+.WeatherImg {
+  /* border: 1px solid red; */
+  width: 60%;
+  margin: 50px auto 10px auto;
+}
+
+.WeatherImg img {
+  width: 102px;
+  height: 134px;
+  margin-left: 50px;
+}
+
+.Aside h1 {
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 90px;
+  line-height: 169px;
+  /* identical to box height */
+  color: #e7e7eb;
+  /* border: 1px solid yellowgreen; */
+  margin: 0;
+}
+
+.AsideDegree {
+  color: #a09fb1;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.WeatherType {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 42px;
+  text-align: center;
+  color: #a09fb1;
+  margin-top: 20px;
+}
+
+.Today {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 21px;
+  color: #88869d;
+  text-align: center;
+  margin-top: 60px;
+  /* border: 1px solid olivedrab; */
+}
+
+.Location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  /* border: 1px solid orange; */
+  color: #88869d;
+  /* margin-top: 40px; */
+}
+
+.LocationPlace {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.LocationIcon {
+  font-size: 18px;
+}
+
+/* .WeatherScreen {
+  border: 1px solid red;
+} */
+
+.AsideSearch {
+  display: none;
+  margin: 10px 20px 0 0;
+  /* border: 1px solid red; */
+}
+
+.Clear {
+  /* border: 1px solid peru; */
+  display: flex;
+  /* width: 50px; */
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.InputGrouping {
+  /* border: 1px solid orange; */
+  width: 90%;
+  margin: 40px auto 0 auto;
+}
+
+.InputGroup {
+  display: flex;
+}
+
+input[type='text'] {
+  font-family: 'Raleway';
+  font-size: 16px;
+  outline: none;
+  width: 200px;
+  height: 35px;
+  border: 1px solid #e7e7eb;
+  background: #1e213a;
+  color: #e7e7eb;
+  padding-left: 30px;
+}
+
+.SearchBtn {
+  height: 35px;
+  width: 81px;
+  margin-left: 6px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  border: 1px solid #3c47e9;
+  outline: none;
+  cursor: pointer;
+  /* identical to box height */
+  color: #e7e7eb;
+  background: #3c47e9;
+}
+
+::placeholder {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  /* identical to box height */
+  color: #616475;
+  /* padding-left: 10px; */
+}
+
+.SearchIcon {
+  position: absolute;
+  padding: 10px;
+  min-width: 40px;
+  font-size: 18px;
+  color: #616475;
+}
+
+.SearchResult {
+  display: none;
+}
+
+.SearchResultBtn {
+  /* border: 1px solid orange; */
+  font-family: 'Raleway';
+  border: 1px solid #616475;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 50px auto 0 auto;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.SearchText,
+.ErrorText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  color: #e7e7eb;
+  margin-left: 10px;
+}
+
+.ErrorText {
+  color: #0d0e13;
+}
+
+.ArrowRight {
+  color: #616475;
+  margin-right: 10px;
+}
+
+.ErrorWeather {
+  border: 1px solid #f5bfc6;
+  width: 90%;
+  margin: 50px auto 0 auto;
+  color: #616475;
+  background: #f5bfc6;
+  display: none;
+  border-left: 2px solid #e65163;
+}
+
+/* Main page styles */
+.Main {
+  height: 100vh;
+  width: 50%;
+  margin: 0 auto;
+  /* border: 1px solid orangered; */
+}
+
+.MainNav {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+  margin: 25px 0 30px 0;
+}
+
+.BtnSwitchDeg {
+  font-family: 'Raleway';
+  font-size: 16px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  /* color: #110e3c; */
+  color: #e7e7eb;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #585676;
+  border-radius: 54px;
+}
+
+.ChangeDegree {
+  color: #110e3c;
+  background: #e7e7eb;
+  cursor: not-allowed;
+}
+
+.FiveDayForecast {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* border: 1px solid yellow; */
+}
+
+.Forecast {
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 120px;
+  height: 157px;
+  background: #1e213a;
 }
 
-.App-link {
-  color: #61dafb;
+.ForecastDay {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  color: #e7e7eb;
+  margin: 20px 0 10px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.WeatherImage {
+  height: 62px;
+  width: 56.43946075439453px;
+}
+
+.High-Low {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.High,
+.Low {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
+}
+
+.High {
+  color: #e7e7eb;
+}
+
+.Low {
+  color: #a09fb1;
+}
+
+.HightLight-Heading {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  color: #e7e7eb;
+  margin: 30px 0 30px 0;
+  /* outline: 1px solid cyan; */
+}
+
+.Today-HighLights-Container {
+  /* border: 1px solid steelblue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 23px;
+}
+
+.Today-HighLights {
+  /* border: 1px solid pink; */
+  width: 328px;
+  height: 137px;
+  background: #1e213a;
+}
+
+.Today-HighLights.Lower {
+  height: 120px;
+}
+
+.WeatherStatus {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 19px;
+  text-align: center;
+  /* identical to box height */
+  /* border: 1px solid tan; */
+  /* margin-top: -25px; */
+}
+
+.WeatherNum {
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  /* line-height: 75px; */
+  color: #e7e7eb;
+  /* border: 1px solid peru; */
+  margin: 0;
+  /* display: inline; */
+}
+
+.StatusType {
+  font-size: 18px;
+}
+
+.WeatherWind {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 16px;
+  color: #e7e7eb;
+}
+
+.NavigationIcon {
+  font-size: 12px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: rotate(-150deg);
+}
+
+.WeatherWindContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+  /* border: 1px solid seagreen; */
+}
+
+.ProgressBarContainer {
+  /* border: 1px solid red; */
+  width: 229px;
+  margin: 10px auto 0 auto;
+}
+
+.PercentageNum {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PercentageNum small,
+.Perce {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 8px;
+  color: #a09fb1;
+}
+
+.Perce {
+  margin: 0;
+  text-align: right;
+}
+
+.ProgressBar {
+  /* background-color: black;
+  border-radius: 13px; */
+  background: #e7e7eb;
+  border-radius: 70px;
+  /* (height of inner div) / 2 + padding */
+  padding: 2px;
+}
+
+.ProgressBar .Progress {
+  background: #ffec65;
+  border-radius: 80px;
+  height: 5px;
+  /* Adjust width with JavaScript */
+  /* width: 30%; */
+}
+
+.Footer {
+  font-family: 'Montserrat' sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: center;
+  color: #616475;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 414px) {
+  .Container {
+    flex-direction: column;
+    /* border: 2px solid blue; */
   }
-  to {
-    transform: rotate(360deg);
+
+  .Aside {
+    /* outline: 1px solid red; */
+    width: 100%;
+    /* height: 110vh; */
+    height: 100%;
+  }
+
+  .AsideNav {
+    margin: 15px 15px;
+  }
+
+  .WeatherImg {
+    /* border: 1px solid red; */
+    width: 60%;
+    margin: 70px auto 10px auto;
+  }
+
+  .WeatherImg img {
+    width: 150px;
+    height: 174px;
+    margin-left: 40px;
+  }
+
+  .Aside h1 {
+    font-size: 100px;
+  }
+
+  .WeatherType {
+    margin-top: -20px;
+    /* border: 1px solid yellow; */
+  }
+
+  .Location {
+    margin-bottom: 100px;
+    /* border: 1px solid orangered; */
+  }
+
+  .AsideSearch {
+    display: none;
+    margin: 10px 20px 0 0;
+    width: 100%;
+    height: 80vh;
+    /* border: 1px solid red; */
+  }
+
+  input[type='text'] {
+    width: 75%;
+    height: 40px;
+  }
+
+  .SearchBtn {
+    height: 40px;
+    width: 25%;
+  }
+
+  .Main {
+    height: 100%;
+    width: 100%;
+    margin: 50px auto 20px auto;
+    /* border: 1px solid orangered; */
+  }
+
+  .MainNav {
+    display: none;
+  }
+
+  .FiveDayForecast {
+    gap: 22px;
+    /* border: 1px solid yellow; */
+    width: 71%;
+    margin: 0 auto;
+  }
+
+  .Forecast {
+    height: 177px;
+  }
+
+  .ForecastDay {
+    margin: 10px 0 15px 0;
+  }
+
+  .High-Low {
+    margin-top: 25px;
+  }
+
+  .HighLights {
+    /* border: 1px solid yellow; */
+    width: 85%;
+    margin: 20px auto 0 auto;
+  }
+
+  .HightLight-Heading {
+    margin: 30px 0 30px 30px;
+    /* outline: 1px solid cyan; */
+  }
+
+  .Today-HighLights {
+    /* border: 1px solid pink; */
+    width: 250px;
+    height: 140px;
+  }
+
+  .ProgressBarContainer {
+    /* border: 1px solid peru; */
+    width: 80%;
+  }
+
+  .Today-HighLights-Container {
+    /* border: 1px solid steelblue; */
+    margin-bottom: 70px;
+  }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+  .Container {
+    flex-direction: column;
+  }
+
+  .Aside {
+    width: 100%;
+
+    height: 100%;
+  }
+
+  .AsideNav {
+    margin: 30px 30px;
+  }
+
+  .WeatherImg {
+    width: 60%;
+    margin: 70px auto 10px auto;
+  }
+
+  .WeatherImg img {
+    width: 250px;
+    height: 174px;
+    margin-left: 100px;
+  }
+
+  .Aside h1 {
+    font-size: 120px;
+  }
+
+  .WeatherType {
+    margin-top: -10px;
+    font-size: 40px;
+  }
+
+  .Location {
+    margin-bottom: 100px;
+  }
+
+  .Clear {
+    margin-right: 10px;
+  }
+
+  .AsideSearch {
+    margin: 10px 20px 0 0;
+    width: 100%;
+    height: 50vh;
+  }
+
+  input[type='text'] {
+    width: 75%;
+    height: 40px;
+  }
+
+  .SearchBtn {
+    height: 40px;
+    width: 25%;
+  }
+
+  .Main {
+    height: 100%;
+    width: 100%;
+    margin: 50px auto 20px auto;
+  }
+
+  .MainNav {
+    display: none;
+  }
+
+  .FiveDayForecast {
+    gap: 22px;
+
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .Forecast {
+    height: 177px;
+  }
+
+  .ForecastDay {
+    margin: 10px 0 15px 0;
+  }
+
+  .High-Low {
+    margin-top: 25px;
+  }
+
+  .HighLights {
+    width: 85%;
+    margin: 20px auto 0 auto;
+  }
+
+  .HightLight-Heading {
+    margin: 30px 0 30px 68px;
+    width: 50%;
+  }
+
+  .Today-HighLights {
+    width: 250px;
+    height: 140px;
+  }
+
+  .ProgressBarContainer {
+    width: 80%;
+  }
+
+  .Today-HighLights-Container {
+    margin-bottom: 70px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .Container {
+    flex-direction: column;
+  }
+
+  .Aside {
+    width: 100%;
+    height: 100%;
+  }
+
+  .AsideNav {
+    margin: 50px 50px;
+  }
+
+  .WeatherImg {
+    width: 60%;
+    margin: 70px auto 10px auto;
+  }
+
+  .WeatherImg img {
+    width: 300px;
+    height: 174px;
+    margin-left: 140px;
+  }
+
+  .Aside h1 {
+    font-size: 160px;
+  }
+
+  .WeatherType {
+    margin-top: -10px;
+    font-size: 40px;
+  }
+
+  .Today {
+    font-size: 20px;
+  }
+
+  .Location {
+    margin-top: 40px;
+  }
+
+  .LocationPlace {
+    font-size: 16px;
+  }
+
+  .LocationIcon {
+    font-size: 22px;
+  }
+
+  .Location {
+    margin-bottom: 100px;
+  }
+
+  .Clear {
+    margin: 15px 15px 0 0;
+  }
+
+  .AsideSearch {
+    margin: 10px 20px 0 0;
+    width: 100%;
+    height: 50vh;
+  }
+
+  input[type='text'] {
+    width: 75%;
+    height: 40px;
+  }
+
+  .SearchBtn {
+    height: 40px;
+    width: 25%;
+  }
+
+  .Main {
+    height: 100%;
+    width: 100%;
+    margin: 50px auto 20px auto;
+  }
+
+  .MainNav {
+    display: none;
+  }
+
+  .FiveDayForecast {
+    gap: 22px;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .Forecast {
+    height: 177px;
+  }
+
+  .ForecastDay {
+    margin: 10px 0 15px 0;
+  }
+
+  .High-Low {
+    margin-top: 25px;
+  }
+
+  .HighLights {
+    width: 70%;
+    margin: 20px auto 0 auto;
+  }
+
+  .HightLight-Heading {
+    margin: 30px 0 30px 94px;
+    width: 50%;
+  }
+
+  .Today-HighLights {
+    width: 250px;
+    height: 140px;
+  }
+
+  .ProgressBarContainer {
+    width: 80%;
+  }
+
+  .Today-HighLights-Container {
+    margin-bottom: 70px;
   }
 }
