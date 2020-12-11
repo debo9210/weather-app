@@ -874,3 +874,31 @@ input[type='text'] {
     margin-bottom: 70px;
   }
 }
+
+@media only screen and (min-width: 1024px) and (max-width: 1125px) {
+  .FiveDayForecast {
+    gap: 23px;
+    width: 80%;
+    /* border: 1px solid red; */
+    margin: 0 auto;
+  }
+
+  .Main {
+    /* border: 1px solid yellow; */
+    width: 100%;
+  }
+
+  .MainNav {
+    /* border: 1px solid cyan; */
+    width: 90%;
+  }
+
+  .HightLight-Heading {
+    margin: 30px 0 30px 94px;
+    width: 50%;
+  }
+
+  .AsideNav {
+    gap: 40px;
+  }
+}
