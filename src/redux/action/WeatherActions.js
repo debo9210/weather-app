@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  GET_CURRENT_LOCATION_FAIL,
+  GET_CURRENT_LOCATION_REQUEST,
+  GET_CURRENT_LOCATION_SUCCESS,
   GET_LOCATION_FAIL,
   GET_LOCATION_REQUEST,
   GET_LOCATION_SUCCESS,
@@ -16,12 +19,12 @@ import {
 
 // const CORS = 'https://cors-anywhere.herokuapp.com/';
 
-export const getUserLocation = (latt, long) => async (dispatch) => {
+export const getUserLocation = () => async (dispatch) => {
   try {
     dispatch({ type: GET_USER_LOCATION_REQUEST });
 
     const { data } = await axios.get(
-      `https://www.metaweather.com/api/location/search/?lattlong=${latt},${long}`
+      'https://www.metaweather.com/api/location/search/?query=johannesburg'
     );
 
     dispatch({
@@ -92,6 +95,26 @@ export const getCurrentWeather = (woeid) => async (dispatch) => {
     dispatch({
       type: GET_WEATHER_DETAILS_FAIL,
       payload: 'Location does not exist. Try Again!',
+    });
+  }
+};
+
+export const getGeoLocation = (latt, long) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_CURRENT_LOCATION_REQUEST });
+
+    const { data } = await axios.get(
+      `https://www.metaweather.com/api/location/search/?lattlong=${latt},${long}`
+    );
+
+    dispatch({
+      type: GET_CURRENT_LOCATION_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_CURRENT_LOCATION_FAIL,
+      payload: error.message,
     });
   }
 };

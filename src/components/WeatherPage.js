@@ -9,13 +9,14 @@ import {
   getUserLocation,
   getUserWeather,
   getCurrentWeather,
+  getGeoLocation,
 } from '../redux/action/WeatherActions';
 import { splitDate, dateFormatter } from '../utils/DateFormater';
+// import { handleSuccess, handleError } from '../utils/UserGeoLocation';
 
 const WeatherPage = () => {
   const dispatch = useDispatch();
 
-  const [error, setError] = useState();
   const [locationName, setLocationName] = useState('');
   const [weatherName, setWeatherName] = useState('');
   const [todayDate, setTodayDate] = useState([]);
@@ -47,11 +48,11 @@ const WeatherPage = () => {
 
   const { userWeather, loading } = useSelector((state) => state.userWeather);
 
-  const { currentWeather, error: weatherError, success } = useSelector(
+  const { currentWeather, error: weatherError } = useSelector(
     (state) => state.weatherDetails
   );
 
-  // console.log(currentWeather);
+  const { geoLocation } = useSelector((state) => state.currentGeoLocation);
 
   const getLocationHandler = () => {
     if (location.length === 0) {
@@ -123,6 +124,43 @@ const WeatherPage = () => {
     setDisableFahrenheitBtn(true);
   };
 
+  const getCurrentLocationWeather = () => {
+    const error = JSON.parse(localStorage.getItem('noGeolocation'));
+
+    const geoLocate = JSON.parse(localStorage.getItem('geoLocate'));
+
+    if (error) {
+      alert(error);
+    } else {
+      if (geoLocate) {
+        dispatch(getGeoLocation(geoLocate.latitude, geoLocate.longitude));
+      }
+    }
+
+    if (geoLocation) {
+      dispatch(getCurrentWeather(geoLocation[0].woeid));
+      // dispatch(getCurrentWeather(44418));
+    }
+
+    if (currentWeather) {
+      setLocationName(currentWeather.title);
+      setWeatherAbbr(currentWeather.consolidated_weather[0].weather_state_abbr);
+      setCurrTemp(Math.round(currentWeather.consolidated_weather[0].the_temp));
+      setWeatherName(currentWeather.consolidated_weather[0].weather_state_name);
+      setTodayDate(dateFormatter(currentWeather.time).split(' ').slice(0, 3));
+      setWindSpeed(
+        Math.round(currentWeather.consolidated_weather[0].wind_speed)
+      );
+      setWindDir(currentWeather.consolidated_weather[0].wind_direction_compass);
+      setHumidity(Math.round(currentWeather.consolidated_weather[0].humidity));
+      setVisibility(
+        currentWeather.consolidated_weather[0].visibility.toFixed(1)
+      );
+      setAirPressure(currentWeather.consolidated_weather[0].air_pressure);
+    }
+    setChangeForecast(true);
+  };
+
   useEffect(() => {
     if (currentWeather) {
       setLocationName(currentWeather.title);
@@ -143,13 +181,7 @@ const WeatherPage = () => {
   }, [currentWeather]);
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported.');
-      return;
-    }
-
-    const geoLocation = JSON.parse(localStorage.getItem('geoLocation'));
-    dispatch(getUserLocation(geoLocation.latitude, geoLocation.longitude));
+    dispatch(getUserLocation());
   }, [dispatch]);
 
   useEffect(() => {
@@ -197,6 +229,7 @@ const WeatherPage = () => {
         changeDeg={disableFahrenheitBtn}
         errorWeather={weatherError}
         errorText={errorText}
+        getCurrentLocation={getCurrentLocationWeather}
       />
 
       <main className='Main'>

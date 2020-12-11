@@ -6,6 +6,7 @@ import {
   weatherDetailsReducer,
   userLocationReducer,
   userLocationWeatherReducer,
+  geoLocationReducer,
 } from './redux/reducer/WeatherReducers';
 
 const reducers = combineReducers({
@@ -13,24 +14,28 @@ const reducers = combineReducers({
   weatherDetails: weatherDetailsReducer,
   userLocation: userLocationReducer,
   userWeather: userLocationWeatherReducer,
+  currentGeoLocation: geoLocationReducer,
 });
 
-// get user geolocation and store to local storage
+// get user geolocation
 const handleSuccess = (position) => {
   const { latitude, longitude } = position.coords;
   const geoLocation = {
     latitude,
     longitude,
   };
-
-  localStorage.setItem('geoLocation', JSON.stringify(geoLocation));
+  localStorage.setItem('geoLocate', JSON.stringify(geoLocation));
 };
-
 const handleError = (error) => {
   localStorage.setItem('error', JSON.stringify(error));
 };
 
-navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+if (!navigator.geolocation) {
+  const localErr = 'No Geolocation services';
+  localStorage.setItem('noGeolocation', JSON.stringify(localErr));
+} else {
+  navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+}
 
 //initial store state
 const initialState = {};

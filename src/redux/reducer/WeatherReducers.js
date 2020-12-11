@@ -12,6 +12,9 @@ import {
   GET_USER_WEATHER_SUCCESS,
   GET_USER_WEATHER_FAIL,
   GET_WEATHER_DETAILS_CLEAR,
+  GET_CURRENT_LOCATION_REQUEST,
+  GET_CURRENT_LOCATION_SUCCESS,
+  GET_CURRENT_LOCATION_FAIL,
 } from '../constants';
 
 export const userLocationReducer = (state = {}, action) => {
@@ -107,6 +110,29 @@ export const weatherDetailsReducer = (state = {}, action) => {
       return {
         loading: false,
         success: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const geoLocationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_CURRENT_LOCATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_CURRENT_LOCATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        geoLocation: action.payload,
+      };
+    case GET_CURRENT_LOCATION_FAIL:
+      return {
+        loading: false,
         error: action.payload,
       };
     default:

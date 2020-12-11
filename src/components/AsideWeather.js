@@ -19,6 +19,7 @@ const AsideWeather = ({
   changeDeg,
   errorWeather,
   errorText,
+  getCurrentLocation,
 }) => {
   const dispatch = useDispatch();
 
@@ -55,8 +56,6 @@ const AsideWeather = ({
     inputValueText.current.value = '';
     setInputValue('');
     dispatch(getLocation(inputValue));
-
-    // console.log(location);
   };
 
   return (
@@ -67,33 +66,14 @@ const AsideWeather = ({
             <button className='BtnSearch' onClick={asideSearchBtn}>
               Search for places
             </button>
-            <i className='material-icons GpsIcon'>gps_fixed</i>
+            <i
+              onClick={getCurrentLocation}
+              className='material-icons GpsIcon'
+              title='Get current location weather'
+            >
+              gps_fixed
+            </i>
           </nav>
-
-          {/* <div className='WeatherScreen'>
-            <div className='WeatherImg'>
-              <img
-                src={`https://www.metaweather.com/static/img/weather/${weatherAbbr}.svg`}
-                alt='weather'
-              />
-            </div>
-
-            <h1>
-              {currTemp}
-              <span className='AsideDegree'>&deg;C</span>
-            </h1>
-
-            <p className='WeatherType'>{weatherName}</p>
-
-            <p className='Today'>
-              Today . {day}, {date} {month}
-            </p>
-
-            <div className='Location'>
-              <i className='material-icons LocationIcon'>location_on</i>
-              <p className='LocationPlace'>{locationName}</p>
-            </div>
-          </div> */}
 
           {loading ? (
             <div className='LoaderAside'>
