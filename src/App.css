@@ -154,20 +154,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  /* gap: 5px; */
   /* border: 1px solid orange; */
   color: #88869d;
-  /* margin-top: 40px; */
+  margin: 25px 0 0 -5px;
+  width: calc(100% + 5px);
 }
 
 .LocationPlace {
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
+  margin: 7px 0 0 7px;
 }
 
 .LocationIcon {
   font-size: 18px;
+  margin: 7px 0 0 7px;
 }
 
 /* .WeatherScreen {
@@ -306,6 +309,8 @@ input[type='text'] {
   justify-content: flex-end;
   gap: 7px;
   margin: 25px 0 30px 0;
+  /* margin: -12px 0 0 -12px; */
+  /* width: calc(100% + 7px); */
 }
 
 .BtnSwitchDeg {
@@ -321,6 +326,7 @@ input[type='text'] {
   cursor: pointer;
   background: #585676;
   border-radius: 54px;
+  margin: 0px 0 0 7px;
 }
 
 .ChangeDegree {
@@ -330,10 +336,12 @@ input[type='text'] {
 }
 
 .FiveDayForecast {
-  display: flex;
+  display: inline-flex;
   gap: 20px;
   flex-wrap: wrap;
   /* border: 1px solid yellow; */
+  /* margin: -14px 0 0 -14px; */
+  /* width: calc(100% + 14px); */
 }
 
 .Forecast {
@@ -345,6 +353,7 @@ input[type='text'] {
   width: 120px;
   height: 157px;
   background: #1e213a;
+  /* margin: 14px 0 0 14px; */
 }
 
 .ForecastDay {
